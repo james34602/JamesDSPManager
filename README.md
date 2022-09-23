@@ -2,18 +2,21 @@
 GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include Samsung, AOSP, Cyanogenmod, recent HTC and Huawei(arm64). 
 This app include many cool features.
 
+This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) uses core library from current repo.
+
 ##### Features:
 
 1. Auto dynamic range compression
    --> A highly automated multiband dynamic range adjusting effect
 
 2. Auto Bass Boost
-   --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arcordingly
+   --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arccordingly
 
 3. Reverb
    --> Progenitor 2 (Complicated IIR network)
 
 4. Interpolating FIR Equalizer
+
 5. Partitioned Convolver (Auto segmenting convolution)
    --> Support mono, stereo, full/true stereo(LL, LR, RL, RR) IR
 
@@ -48,7 +51,7 @@ More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
 ### FAQ
 #### 1. Computation datatype?
 
-A: Float32(Close source due to proprietary spatialization algorithm).
+A: Float32.
 
 #### 2. What is convolver?
 
@@ -99,9 +102,6 @@ B: Automatic installation(Supported up to Android Pie)
    1. Copy zip package to your phone, reboot to custom recovery, install package, reboot, done.
    2. Get Magisk manager to install JDSP.
 Now work on most Android device from Lollipop to Pie
-
-##### Coming up:
-1. Auto-detected bit rates MP3 high frequency harmonic excitor
 
 ## Download Link
 1. See my project release page
