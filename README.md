@@ -1,4 +1,4 @@
-# JamesDSP (Audio Effect Digital Signal Processing library for Android)
+# JamesDSP (Cross-platform Audio Effect / Digital Signal Processing library)
 GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include Samsung, AOSP, Cyanogenmod, recent HTC and Huawei(arm64). 
 This app include many cool features.
 
@@ -20,9 +20,7 @@ This app include many cool features.
 6. Live programmable DSP
    --> A effect that can compile EEL code into opcode, and do processing base on the compiled code.
 The EEL virtual machine had pre-built tons of advanced math routines and DSP function.
-Including: Basic C String manipulation functions, Linear algebra solver(Least square, inv(), pinv()), Mathematical optimization(linprog(), quadprog(), lsqlin()), polynomial roots solver(roots()), spectral processing(Short-time Fourier Transform), Constant Q Transform, multi-purpose FIR filter designer(firls()), IIR Subbands transform, Direct form FIR filter, Fractional delay line.
-
-Although STFT, DF-FIR and Fractional delay line are the only components that have been opened.
+Including: Basic C String manipulation functions, Linear algebra solver(Least square, inv(), pinv()), Mathematical optimization(linprog(), quadprog(), lsqlin()), polynomial roots solver(roots()), spectral processing(Short-time Fourier Transform), Polyphase filterbank(Constant Q Transform), multi-purpose IIR / FIR filter designer(eqnerror() / firls()), IIR Subbands transform, Direct form FIR filter, Fractional delay line, Polyphase resampler, real time 1D convolution, Autoregressive Burg estimator, simple peak finding algorithm.
 
 More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
 
