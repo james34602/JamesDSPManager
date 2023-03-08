@@ -1,5 +1,5 @@
 # JamesDSP (Cross-platform Audio Effect / Digital Signal Processing library)
-GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include Samsung, AOSP, Cyanogenmod, recent HTC and Huawei(arm64). 
+GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include AOSP, Cyanogenmod, Huawei(arm64), LineageOS, Samsung and recent HTC. 
 This app include many cool features.
 
 This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) uses core library from current repo.
