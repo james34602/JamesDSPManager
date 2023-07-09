@@ -6,8 +6,8 @@ This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audi
 
 ##### Features:
 
-1. Auto dynamic range compression
-   --> A highly automated multiband dynamic range adjusting effect
+1. Multiband, multiresolution dynamic range compander
+   --> A highly tunable multiband dynamic range boosting/reducing
 
 2. Auto Bass Boost
    --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arccordingly
@@ -43,7 +43,8 @@ More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
 |----------|-------------|
 | 8        | Unsupported |
 | 16       | Supported   |
-| 24(Int)  | Unsupported |
+| 24(3bInt)| Supported |
+| 24(4bInt)| Supported |
 | 32(Int)  | Supported   |
 | 32(Float)| Supported   |
 
@@ -122,7 +123,7 @@ Better contact me by email. Send to james34602@gmail.com
 The engine frame is based on Antti S. Lankila's DSPManager.
 
 ### Credit
-1. Joseph Young (Impulse response provider)
+1. Joseph Young (Provider of dynamic range compander logic and varies impulse responses)
 2. Christopher Blomeyer (Very patient app tester and inspiring me bit depth issue)
 3. [ahrion](https://github.com/therealahrion) (Making installation tools)
 4. [Zackptg5](https://github.com/Zackptg5) (Making installation tools)
