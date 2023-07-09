@@ -7,7 +7,7 @@ This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audi
 ##### Features:
 
 1. Multiband, multiresolution dynamic range compander
-   --> A highly tunable multiband dynamic range boosting/reducing
+   --> A highly tunable multiband dynamic range booster/reducer
 
 2. Auto Bass Boost
    --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arccordingly
@@ -15,7 +15,8 @@ This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audi
 3. Reverb
    --> Progenitor 2 (Complicated IIR network)
 
-4. Interpolating FIR Equalizer
+4. Interpolating FIR Equalizer and IIR Equalizer
+   -->Both FIR and IIR equalizer yield flat response when the gain is uniform, unlike some competitors
 
 5. Partitioned Convolver (Auto segmenting convolution)
    --> Support mono, stereo, full/true stereo(LL, LR, RL, RR) IR
@@ -34,17 +35,18 @@ More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
    --> Include traditional BS2B mode and convolution-based HRTF
 
 9. Vacuum tube modelling
+   --> Second harmonic generator
 
-10. Viper DDC (IIR Cascaded Second-Order Sections Form II)
+10. Viper DDC (Cascaded Second-Order Sections Form II IIR filterbank)
 
 ##### Supported bit depth:
 
-| # bits   | Status      |
-|----------|-------------|
+| # bits   | Status     |
+|----------|------------|
 | 8        | Unsupported |
 | 16       | Supported   |
-| 24(3bInt)| Supported |
-| 24(4bInt)| Supported |
+| 24(3bInt)| Supported   |
+| 24(4bInt)| Supported   |
 | 32(Int)  | Supported   |
 | 32(Float)| Supported   |
 
