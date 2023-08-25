@@ -121,6 +121,7 @@ double i0(double x)
 	}
 	return(exp(x) * chbevl(32.0 / x - 2.0, B, 25) / sqrt(x));
 }
+#include "../FilterDesign/fdesign.h"
 unsigned int getcoeff(double ratio, double atten, unsigned long long N, unsigned int incre, float *y)
 {
 	unsigned long long m;
