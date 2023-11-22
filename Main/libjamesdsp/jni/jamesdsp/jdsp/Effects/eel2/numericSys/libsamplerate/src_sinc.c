@@ -1,5 +1,6 @@
 /*
 ** Copyright (c) 2002-2021, Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (c) 2023, James Fung <james34602@gmail.com>
 ** All rights reserved.
 **
 ** This code is released under 2-clause BSD license. Please see the
@@ -132,7 +133,10 @@ unsigned int getcoeff(double ratio, double atten, unsigned long long N, unsigned
 	y[0] = 1.0;
 	for (m = 1; m < ((N - 1) >> 1) + 1; m++)
 	{
-		double w = i0(bta * sqrt(1.0 - (double)(4 * m * m) * xind)) * bes;
+		double v = 1.0 - (double)(4 * m * m) * xind;
+		if (v < 0.0)
+			v = 0.0;
+		double w = i0(bta * sqrt(v)) * bes;
 		double f = sinc(m / ratio) * w;
 		y[m] = f;
 		sum += f;
