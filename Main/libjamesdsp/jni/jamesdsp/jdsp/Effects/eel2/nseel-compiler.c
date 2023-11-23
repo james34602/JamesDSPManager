@@ -548,17 +548,17 @@ void discreteHartleyTransformFloat(float *A, const int32_t nPoints, const float 
 void getAsymmetricWindow(float *analysisWnd, float *synthesisWnd, int32_t k, int32_t m, float freq_temporal)
 {
 	int32_t i;
+	if ((k / m) < 4)
+		freq_temporal = 1.0f;
+	if (freq_temporal > 9.0f)
+		freq_temporal = 9.0f;
 	memset(synthesisWnd, 0, k * sizeof(float));
-	if (freq_temporal < 0.4f)
-		freq_temporal = 0.4f;
-	if (freq_temporal > 1.8f)
-		freq_temporal = 1.8f;
 	int32_t n = ((k - m) << 1) + 2;
 	for (i = 0; i < k - m; ++i)
-		analysisWnd[i] = (float)pow(sqrt(0.5 * (1.0 - cos(2.0 * M_PIDouble * (i + 1.0) / (double)n))), freq_temporal);
+		analysisWnd[i] = (float)pow(0.5 * (1.0 - cos(2.0 * M_PIDouble * (i + 1.0) / (double)n)), freq_temporal);
 	n = (m << 1) + 2;
-	if (freq_temporal > 1.5f)
-		freq_temporal = 1.5f;
+	if (freq_temporal > 1.02)
+		freq_temporal = 1.02;
 	for (i = k - m; i < k; ++i)
 		analysisWnd[i] = (float)pow(sqrt(0.5 * (1.0 - cos(2.0 * M_PIDouble * ((m + i - (k - m)) + 1.0) / (double)n))), freq_temporal);
 	n = m << 1;
@@ -828,6 +828,10 @@ static float NSEEL_CGEN_CALL stftCheckMemoryRequirement(void *opaque, INT_PTR nu
 	int32_t fftlen = (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
 	int32_t analyOv = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	return (float)STFT_DynConstructor(indexer, fftlen, analyOv, *parms[3]);
+}
+static float NSEEL_CGEN_CALL stftStructSize(void *opaque)
+{
+	return (float)(6 * sizeof(int32_t));
 }
 static inline double ipowp(double x, long n)
 {
@@ -4461,6 +4465,10 @@ static float _eel_lerp(void *opaque, INT_PTR num_param, float **parms)
 	else
 		return (*parms[0] - x[j - 1]) / (x[j] - x[j - 1]) * (y[j] - y[j - 1]) + y[j - 1]; // Interpolation
 }
+static float NSEEL_CGEN_CALL breakpointFunc(void *opaque)
+{
+	return 0;
+}
 #define redirect(x) static float redirect_##x(float _input1){return x(_input1); }
 #define redirect2(x) static float redirect_##x(float _input1, float _input2){return x(_input1, _input2); }
 redirect(sinf);
@@ -4534,6 +4542,7 @@ static functionType fnTable1[] = {
   {"memset",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_RAM_MemSet},NSEEL_PProc_RAM},
   {"sleep",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void**)&_eel_sleep}},
   {"time",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void**)&_eel_time},NSEEL_PProc_THIS},
+  {"breakpoint",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void **)&breakpointFunc},NSEEL_PProc_THIS},
   {"time_precise",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void**)&_eel_time_precise},NSEEL_PProc_THIS},
   {"strlen",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_strlen},NSEEL_PProc_THIS},
   {"base64_encode",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void**)&_eel_base64_encode},NSEEL_PProc_THIS},
@@ -4556,6 +4565,7 @@ static functionType fnTable1[] = {
   {"arburgPredictForward",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&arburgPredictForward},NSEEL_PProc_RAM},
   {"getCosineWindows",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&getCosineWindows},NSEEL_PProc_THIS},
   {"getAsymmetricCosine",_asm_generic2parm_retd,_asm_generic2parm_retd_end,5 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&getAsymmetricCosine},NSEEL_PProc_THIS},
+  {"stftStructSize",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void **)&stftStructSize},NSEEL_PProc_THIS},
   {"stftCheckMemoryRequirement",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftCheckMemoryRequirement},NSEEL_PProc_THIS},
   {"stftInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftInit},NSEEL_PProc_THIS},
   {"iirHilbertProcess",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void **)&iirHilbertProcess},NSEEL_PProc_RAM},
@@ -8123,6 +8133,8 @@ opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) 
 			return nseel_createCompiledValue(ctx, (float)2.71828182845904523536);
 		else if (!tmplen ? !stricmp(tmp, "$PI") : (tmplen == 3 && !strnicmp(tmp, "$PI", 3)))
 			return nseel_createCompiledValue(ctx, (float)M_PIDouble);
+		else if (!tmplen ? !stricmp(tmp, "$2PI") : (tmplen == 4 && !strnicmp(tmp, "$2PI", 4)))
+			return nseel_createCompiledValue(ctx, (float)(2.0 * M_PIDouble));
 		else if (!tmplen ? !stricmp(tmp, "$PHI") : (tmplen == 4 && !strnicmp(tmp, "$PHI", 4)))
 			return nseel_createCompiledValue(ctx, (float)1.618033988749894848205);
 		else if (!tmplen ? !stricmp(tmp, "$EPS") : (tmplen == 4 && !strnicmp(tmp, "$EPS", 4)))
