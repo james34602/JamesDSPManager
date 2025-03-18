@@ -108,7 +108,7 @@ cc_defaults {
         "libhardware_headers",
     ],
     lto: {
-        // TODO: full was removed in 0713e336d9898aad7c161e92b8d27096142b64b6 (build/soong)
+        // TODO: full was removed in https://android-review.googlesource.com/c/platform/build/soong/+/2609595
         thin: true,
     },
 }
@@ -135,6 +135,9 @@ cc_defaults {
     shared_libs: [
         "liblog",
     ],
+    cflags: [
+        "-DBACKEND_NDK",
+    ],
 }
 
 cc_library_shared {
@@ -149,5 +152,24 @@ cc_library_shared {
     ],
     cflags: [
         "-fvisibility=hidden",
+    ],
+}
+
+cc_library_shared {
+    name: "libjamesdspaidl",
+    vendor: true,
+    relative_install_path: "soundfx",
+    defaults: [
+        "aidlaudioeffectservice_defaults",
+        "jdspEffectDefaults",
+    ],
+    srcs: [
+        "jamesdsp_aidl.cpp",
+        // AOSP
+        ":effectCommonFile",
+    ],
+    static_libs: [
+        "libaudio_aidl_conversion_common_ndk",
+        "libstagefright_foundation",
     ],
 }
