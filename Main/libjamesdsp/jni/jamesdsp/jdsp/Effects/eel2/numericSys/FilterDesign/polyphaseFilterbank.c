@@ -48,6 +48,7 @@ double getOptimalDF(unsigned int N, unsigned int m)
 				return 0.51554 * exp(-0.38706 * N) + 0.060656 * exp(-0.025357 * N);
 			else if (m == 6)
 				return 0.51908 * exp(-0.40187 * N) + 0.057579 * exp(-0.027425 * N);
+			else return 0; /* TODO: assert(!"Unreachable"); */
 		}
 	}
 	else

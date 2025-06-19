@@ -61,7 +61,7 @@ void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
 			jdsp->advXF.convLong_S_S = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
 			FFTConvolver2x4x2Init(jdsp->advXF.convLong_S_S);
 			FFTConvolver2x4x2LoadImpulseResponse(jdsp->advXF.convLong_S_S, (unsigned int)jdsp->blockSize, jdsp->hrtfblobsResampled[0], jdsp->hrtfblobsResampled[1], jdsp->hrtfblobsResampled[2], jdsp->hrtfblobsResampled[3], jdsp->frameLenSVirResampled);
-			jdsp->advXF.process = CrossfeedProcessFFTConvolver2x4x2;
+			jdsp->advXF.process = (void *) CrossfeedProcessFFTConvolver2x4x2;
 		}
 		else
 		{
@@ -69,7 +69,7 @@ void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
 			jdsp->advXF.convLong_T_S = (TwoStageFFTConvolver2x4x2 *)malloc(sizeof(TwoStageFFTConvolver2x4x2));
 			TwoStageFFTConvolver2x4x2Init(jdsp->advXF.convLong_T_S);
 			TwoStageFFTConvolver2x4x2LoadImpulseResponse(jdsp->advXF.convLong_T_S, (unsigned int)jdsp->blockSize, seg2Len, jdsp->hrtfblobsResampled[0], jdsp->hrtfblobsResampled[1], jdsp->hrtfblobsResampled[2], jdsp->hrtfblobsResampled[3], jdsp->frameLenSVirResampled);
-			jdsp->advXF.process = CrossfeedProcessTwoStageFFTConvolver2x4x2;
+			jdsp->advXF.process = (void *) CrossfeedProcessTwoStageFFTConvolver2x4x2;
 		}
 		jdsp->crossfeedForceRefresh = 0;
 	}

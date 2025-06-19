@@ -4,6 +4,7 @@ LOCAL_MODULE := libjamesdsp
 LOCAL_PRELINK_MODULE := false
 LOCAL_SRC_FILES := \
 	cpthread.c \
+	jdsp_impl.c \ 
 	jdsp/generalDSP/spectralInterpolatorFloat.c \
 	jdsp/generalDSP/ArbFIRGen.c \
 	jdsp/Effects/eel2/numericSys/codelet.c \
